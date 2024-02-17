@@ -1,3 +1,8 @@
+
+create database Coders;
+
+USE Coders;
+
 CREATE table Login
 (
 	mailID varchar(30) PRIMARY KEY,
@@ -9,7 +14,7 @@ CREATE table Session
 (
 	sessionID varchar(40),
 	mailID varchar(30),
-    loggedTime TIMESTAMP,
+   	loggedTime TIMESTAMP,
 	FOREIGN KEY(mailID) REFERENCES Login(mailID)
 );
 
@@ -27,9 +32,7 @@ CREATE table Users
 	userName varchar(50),
 	score int,
 	streak int,
-	clanID varchar(8),
-	FOREIGN KEY(mailID) REFERENCES Login(mailID),
-	FOREIGN KEY(clanID) REFERENCES Clan(clanID)
+	FOREIGN KEY(mailID) REFERENCES Login(mailID)
 );
 
 CREATE table ClanRelation
@@ -42,16 +45,17 @@ CREATE table ClanRelation
 
 
 create table Levels(
-	levelID tinyint auto_increment primary key,
+    levelID tinyint auto_increment primary key,
+    level_name varchar(10),
     score tinyint default 0
 );
 
 CREATE table Questions
 (
-	Q_ID int AUTO_INCREMENT PRIMARY KEY,
+    Q_ID int AUTO_INCREMENT PRIMARY KEY,
     Q_name varchar(100),
-	description text,
-	funcName text,
+    description text,
+    funcName text,
     levelID tinyint,
     mailID varchar(30),
     FOREIGN KEY(mailID) REFERENCES Login(mailID),
@@ -78,6 +82,8 @@ CREATE table Solutions
 	Sol_ID int AUTO_INCREMENT PRIMARY KEY,
 	mailID varchar(8),
 	Q_ID int,
+	Sol text,
+	status enum('ATTEMPTED', 'COMPLETED'),
 	FOREIGN KEY(mailID) REFERENCES Login(mailID),
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID)
 );
@@ -95,3 +101,7 @@ CREATE table TagsRelation
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID),
 	FOREIGN KEY(Tag_ID) REFERENCES Tags(Tag_ID)
 );
+
+INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
+
+INSERT into Levels(level_name,score) values ('8Kyu',2),('7Kyu',3),('6Kyu',4);
