@@ -30,8 +30,8 @@ CREATE table Users
 (
 	mailID varchar(30) not null unique,
 	userName varchar(50),
-	score int,
-	streak int,
+	score int default 0,
+	streak int default 0,
 	FOREIGN KEY(mailID) REFERENCES Login(mailID)
 );
 
@@ -80,7 +80,7 @@ CREATE table LanguageRelation
 CREATE table Solutions
 (
 	Sol_ID int AUTO_INCREMENT PRIMARY KEY,
-	mailID varchar(8),
+	mailID varchar(30),
 	Q_ID int,
 	Sol text,
 	status enum('ATTEMPTED', 'COMPLETED'),
