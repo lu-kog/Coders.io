@@ -23,7 +23,9 @@ CREATE table Session
 CREATE table Clan
 (
 	clanID varchar(8) PRIMARY KEY,
-	clanName varchar(100)
+	clanName varchar(100),
+	mailID varchar(30),
+	FOREIGN KEY(mailID) REFERENCES Login(mailID)
 );
 
 CREATE table Users
