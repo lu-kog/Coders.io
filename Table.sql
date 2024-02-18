@@ -86,6 +86,7 @@ CREATE table Solutions
 	Q_ID int,
 	Sol text,
 	status enum('ATTEMPTED', 'COMPLETED'),
+	solvedType enum('PRACTICE','TOURNAMENT'),
 	FOREIGN KEY(mailID) REFERENCES Login(mailID),
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID)
 );
