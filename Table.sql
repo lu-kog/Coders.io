@@ -15,7 +15,7 @@ CREATE table Session
 	sessionID varchar(40),
 	mailID varchar(30),
    	loggedTime TIMESTAMP,
-	FOREIGN KEY(mailID) REFERENCES Login(mailID)
+	FOREIGN KEY(mailID) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE 
 );
 
 
@@ -25,7 +25,7 @@ CREATE table Clan
 	clanID varchar(8) PRIMARY KEY,
 	clanName varchar(100),
 	Admin varchar(30),
-	FOREIGN KEY(Admin) REFERENCES Login(mailID)
+	FOREIGN KEY(Admin) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE table Users
@@ -34,15 +34,15 @@ CREATE table Users
 	userName varchar(50),
 	score int default 0,
 	streak int default 0,
-	FOREIGN KEY(mailID) REFERENCES Login(mailID)
+	FOREIGN KEY(mailID) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE table ClanRelation
 (
 	clanID varchar(8),
 	mailID varchar(30) NOT NULL UNIQUE,
-	FOREIGN KEY(clanID) REFERENCES Clan(clanID),
-	FOREIGN KEY(mailID) REFERENCES Login(mailID)
+	FOREIGN KEY(clanID) REFERENCES Clan(clanID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(mailID) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -50,8 +50,8 @@ CREATE table ClanRequest
 (
 	clanID varchar(8),
 	mailID varchar(30),
-	FOREIGN KEY(clanID) REFERENCES Clan(clanID),
-	FOREIGN KEY(mailID) REFERENCES Login(mailID)
+	FOREIGN KEY(clanID) REFERENCES Clan(clanID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(mailID) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -68,8 +68,8 @@ CREATE table Questions
     description text,
     levelID tinyint,
     Author varchar(30),
-    FOREIGN KEY(Author) REFERENCES Login(mailID),
-    FOREIGN KEY(levelID) REFERENCES Levels(levelID)
+    FOREIGN KEY(Author) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(levelID) REFERENCES Levels(levelID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE table Languages
@@ -84,8 +84,8 @@ CREATE table LanguageRelation
 	Q_ID varchar(8),
 	funcName text,
 	testCases varchar(255),
-	FOREIGN KEY(l_ID) REFERENCES Languages(l_ID),
-	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID)
+	FOREIGN KEY(l_ID) REFERENCES Languages(l_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE table Solutions
@@ -96,8 +96,8 @@ CREATE table Solutions
 	Sol text,
 	status enum('ATTEMPTED', 'COMPLETED'),
 	solvedType enum('PRACTICE','TOURNAMENT'),
-	FOREIGN KEY(mailID) REFERENCES Login(mailID),
-	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID)
+	FOREIGN KEY(mailID) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE table Tags
@@ -110,8 +110,8 @@ CREATE table TagsRelation
 (
 	Q_ID varchar(8),
 	Tag_ID int,
-	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID),
-	FOREIGN KEY(Tag_ID) REFERENCES Tags(Tag_ID)
+	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(Tag_ID) REFERENCES Tags(Tag_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
