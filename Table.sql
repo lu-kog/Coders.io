@@ -105,6 +105,14 @@ CREATE table TagsRelation
 	FOREIGN KEY(Tag_ID) REFERENCES Tags(Tag_ID)
 );
 
+CREATE table ClanRequest
+(
+	clanID varchar(8),
+	mailID varchar(30) NOT NULL UNIQUE,
+	FOREIGN KEY(clanID) REFERENCES Clan(clanID),
+	FOREIGN KEY(mailID) REFERENCES Login(mailID)
+);
+
 INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
 
 INSERT into Levels(level_name,score) values ('8Kyu',2),('7Kyu',3),('6Kyu',4);
