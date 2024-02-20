@@ -36,7 +36,6 @@ CREATE table Users
 	streak int default 0,
 	Datejoined date,
 	Streakdate date,
-	streakCount int default 0,
 	Ace_badge int default 0,
 	Conquer_badge int default 0,
 	Crown_badge int default 0,
