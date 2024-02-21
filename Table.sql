@@ -100,8 +100,10 @@ CREATE table Solutions
 	mailID varchar(30),
 	Q_ID varchar(8),
 	Sol text,
+	lang_ID int,
 	status enum('ATTEMPTED', 'COMPLETED'),
 	solvedType enum('PRACTICE','TOURNAMENT'),
+	FOREIGN KEY(lang_ID) REFERENCES Languages(l_ID),
 	FOREIGN KEY(mailID) REFERENCES Login(mailID),
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID)
 );
@@ -195,3 +197,28 @@ Examples
 n = 0  ==> [1]        # [2^0]
 n = 1  ==> [1, 2]     # [2^0, 2^1]
 n = 2  ==> [1, 2, 4]  # [2^0, 2^1, 2^2]',2,"charu07@gmail.com");
+
+
+ insert into ClanRelation(clanID, mailID) values(2098578, 'charu07@gmail.com');
+ insert into ClanRelation(clanID, mailID) values(2098578, 'vasanth02@gmail.com');
+ insert into ClanRelation(clanID, mailID) values(2098578, 'gokul01@gmail.com');
+ insert into ClanRelation(clanID, mailID) values(2098578, 'santhiya04@gmail.com');
+ insert into ClanRelation(clanID, mailID) values(2098578, 'tharan001@gmail.com');
+ insert into ClanRelation(clanID, mailID) values(2098578, 'sorimuthu33@gmail.com');
+ 
+ 
+update Users set score = 166 where userName like 'Charu';
+update Users set score = 350 where userName like 'Gokul';
+update Users set score = 547 where userName like 'Santhiya';
+update Users set score = 337 where userName like 'Sorimuthu';
+update Users set score = 263 where userName like 'Tharan';
+update Users set score = 462 where userName like 'Vasanth';
+
+
+insert into LanguageRelation values(1, '09796534', 'name', 'test'),(3, '56873465', 'name', 'testing');
+insert into LanguageRelation values(1, '45983322', 'name', 'test'),(3, '45983322', 'name', 'testing');
+
+ insert into Solutions values('12345678', 'charu07@gmail.com', '45983322', 'testing', 1, 'COMPLETED', 'PRACTICE');
+ insert into Solutions values('12345648', 'charu07@gmail.com', '45983322', 'testing', 3, 'COMPLETED', 'PRACTICE');
+ insert into Solutions values('16345648', 'charu07@gmail.com', '56321409', 'testing', 3, 'COMPLETED', 'PRACTICE');
+
