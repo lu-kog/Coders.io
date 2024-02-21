@@ -72,6 +72,7 @@ CREATE table Questions
     Q_ID varchar(8)primary key,
     Q_name varchar(100),
     description text,
+    example text,
     levelID tinyint,
     Author varchar(30),
     FOREIGN KEY(Author) REFERENCES Login(mailID),
