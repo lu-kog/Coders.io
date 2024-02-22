@@ -3,19 +3,34 @@ create database Coders;
 
 USE Coders;
 
-CREATE table Login
+
+CREATE table Users
 (
 	mailID varchar(30) PRIMARY KEY,
-	passwd varchar(255),
-	Role ENUM('USER', 'ADMIN')
+	userName varchar(50),
+	score int default 0,
+	streak int default 0,
+	Datejoined date,
+	Streakdate date,
+	Ace_badge int default 0,
+	Conquer_badge int default 0,
+	Crown_badge int default 0
+);
+
+CREATE table Login
+(
+	mailID varchar(30) unique,
+	passwd varchar(255) not null,
+	Role ENUM('USER', 'ADMIN') default 'USER',
+	FOREIGN KEY(mailID) REFERENCES Users(mailID)
 );
 
 CREATE table Session
 (
-	sessionID varchar(40),
+	sessionID varchar(40) PRIMARY KEY,
 	mailID varchar(30),
    	loggedTime TIMESTAMP,
-	FOREIGN KEY(mailID) REFERENCES Login(mailID) 
+	FOREIGN KEY(mailID) REFERENCES Users(mailID) 
 );
 
 
@@ -25,22 +40,10 @@ CREATE table Clan
 	clanID varchar(8) PRIMARY KEY,
 	clanName varchar(100),
 	Admin varchar(30),
-	FOREIGN KEY(Admin) REFERENCES Login(mailID)
+	FOREIGN KEY(Admin) REFERENCES Users(mailID)
 );
 
-CREATE table Users
-(
-	mailID varchar(30) not null unique,
-	userName varchar(50),
-	score int default 0,
-	streak int default 0,
-	Datejoined date,
-	Streakdate date,
-	Ace_badge int default 0,
-	Conquer_badge int default 0,
-	Crown_badge int default 0,
-	FOREIGN KEY(mailID) REFERENCES Login(mailID)
-);
+
 
 CREATE table ClanRelation
 (
@@ -48,7 +51,7 @@ CREATE table ClanRelation
 	mailID varchar(30) NOT NULL UNIQUE,
 	role enum('CO_ADMIN', 'MEMBER') default 'MEMBER',
 	FOREIGN KEY(clanID) REFERENCES Clan(clanID) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY(mailID) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY(mailID) REFERENCES Users(mailID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -57,7 +60,7 @@ CREATE table ClanRequest
 	clanID varchar(8),
 	mailID varchar(30),
 	FOREIGN KEY(clanID) REFERENCES Clan(clanID) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY(mailID) REFERENCES Login(mailID) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY(mailID) REFERENCES Users(mailID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -75,7 +78,7 @@ CREATE table Questions
     example text,
     levelID tinyint,
     Author varchar(30),
-    FOREIGN KEY(Author) REFERENCES Login(mailID),
+    FOREIGN KEY(Author) REFERENCES Users(mailID),
     FOREIGN KEY(levelID) REFERENCES Levels(levelID)
 );
 
@@ -105,7 +108,7 @@ CREATE table Solutions
 	status enum('ATTEMPTED', 'COMPLETED'),
 	solvedType enum('PRACTICE','TOURNAMENT'),
 	FOREIGN KEY(lang_ID) REFERENCES Languages(l_ID),
-	FOREIGN KEY(mailID) REFERENCES Login(mailID),
+	FOREIGN KEY(mailID) REFERENCES Users(mailID),
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID)
 );
 
@@ -128,6 +131,7 @@ CREATE table TagsRelation
 INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
 
 INSERT into Levels(level_name,score) values ('8Kyu',2),('7Kyu',3),('6Kyu',4);
+/*
 
 insert into Login values 
 	("gokul01@gmail.com", "12345", 'USER'),
@@ -223,3 +227,4 @@ insert into LanguageRelation values(1, '45983322', 'name', 'test'),(3, '45983322
  insert into Solutions values('12345648', 'charu07@gmail.com', '45983322', 'testing', 3, 'COMPLETED', 'PRACTICE');
  insert into Solutions values('16345648', 'charu07@gmail.com', '56321409', 'testing', 3, 'COMPLETED', 'PRACTICE');
 
+*/
