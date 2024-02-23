@@ -126,7 +126,15 @@ CREATE table TagsRelation
 	FOREIGN KEY(Tag_ID) REFERENCES Tags(Tag_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
+CREATE table Tournament
+(
+	mailID varchar(30) unique,
+	Start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	End_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	Q_ID int,
+	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID),
+	FOREIGN KEY(mailID) REFERENCES Users(mailID) 
+);
 
 INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
 
