@@ -131,17 +131,23 @@ CREATE table Tournament
 	mailID varchar(30) unique,
 	Start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	End_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	Q_ID int,
-	Sol_ID varchar(8)
+	Q_ID varchar(8),
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID),
-	FOREIGN KEY(mailID) REFERENCES Users(mailID),
-	FOREIGN KEY(Sol_ID) REFERENCES Solutions(Sol_ID)
+	FOREIGN KEY(mailID) REFERENCES Users(mailID) 
 );
 
 INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
 
 INSERT into Levels(level_name,score) values ('8Kyu',2),('7Kyu',3),('6Kyu',4);
-/*
+
+
+insert into Users (mailID, userName) values
+	("gokul01@gmail.com", "Gokul"),
+	("vasanth02@gmail.com", "Vasanth"),
+	("charu07@gmail.com", "Charu"),
+	("santhiya04@gmail.com", "Santhiya"),
+	("tharan001@gmail.com", "Tharan"),
+	("sorimuthu33@gmail.com", "Sorimuthu");
 
 insert into Login values 
 	("gokul01@gmail.com", "12345", 'USER'),
@@ -151,18 +157,12 @@ insert into Login values
 	("tharan001@gmail.com", "51973", 'USER'),
 	("sorimuthu33@gmail.com", "09876", 'USER');
 
-insert into Clan(clanID, clanName) values
-	("5442987", "zohoSchools"),
-	("2098578", "coders"),
-	("3057823", "softwareEngineers");
+insert into Clan(clanID, clanName, Admin) values
+	("5442987", "zohoSchools", "gokul01@gmail.com"),
+	("2098578", "coders", "vasanth02@gmail.com"),
+	("3057823", "softwareEngineers", "charu07@gmail.com");
 	
-insert into Users (mailID, userName) values
-	("gokul01@gmail.com", "Gokul"),
-	("vasanth02@gmail.com", "Vasanth"),
-	("charu07@gmail.com", "Charu"),
-	("santhiya04@gmail.com", "Santhiya"),
-	("tharan001@gmail.com", "Tharan"),
-	("sorimuthu33@gmail.com", "Sorimuthu");
+
 	
 INSERT into Questions(Q_ID, Q_name,description,levelID,Author) values ("56873465","Remove the minimum",'The museum of incredibly dull things wants to get rid of some exhibits. Miriam, the interior architect, comes up with a plan to remove the most boring exhibits. She gives them a rating, and then removes the one with the lowest rating. However, just as she finished rating all exhibits, shes off to an important fair, so she asks you to write a program that tells her the ratings of the exhibits after removing the lowest one. Fair enough. Task Given an array of integers, remove the smallest value. Do not mutate the original array/list. If there are multiple elements with the same value, remove the one with the lowest index. If you get an empty array/list, return an empty array/list. Dont change the order of the elements that are left. Examples * Input: [1,2,3,4,5], output = [2,3,4,5] * Input: [5,3,2,1,4], output = [5,3,2,4] * Input: [2,2,1,2,1], output = [2,2,2,1]',1,"gokul01@gmail.com");
 
@@ -214,12 +214,12 @@ n = 1  ==> [1, 2]     # [2^0, 2^1]
 n = 2  ==> [1, 2, 4]  # [2^0, 2^1, 2^2]',2,"charu07@gmail.com");
 
 
- insert into ClanRelation(clanID, mailID) values(2098578, 'charu07@gmail.com');
- insert into ClanRelation(clanID, mailID) values(2098578, 'vasanth02@gmail.com');
- insert into ClanRelation(clanID, mailID) values(2098578, 'gokul01@gmail.com');
- insert into ClanRelation(clanID, mailID) values(2098578, 'santhiya04@gmail.com');
- insert into ClanRelation(clanID, mailID) values(2098578, 'tharan001@gmail.com');
- insert into ClanRelation(clanID, mailID) values(2098578, 'sorimuthu33@gmail.com');
+ insert into ClanRelation(clanID, mailID) values('2098578', 'charu07@gmail.com');
+ insert into ClanRelation(clanID, mailID) values('2098578', 'vasanth02@gmail.com');
+ insert into ClanRelation(clanID, mailID) values('2098578', 'gokul01@gmail.com');
+ insert into ClanRelation(clanID, mailID) values('2098578', 'santhiya04@gmail.com');
+ insert into ClanRelation(clanID, mailID) values('2098578', 'tharan001@gmail.com');
+ insert into ClanRelation(clanID, mailID) values('2098578', 'sorimuthu33@gmail.com');
  
  
 update Users set score = 166 where userName like 'Charu';
@@ -237,4 +237,4 @@ insert into LanguageRelation values(1, '45983322', 'name', 'test'),(3, '45983322
  insert into Solutions values('12345648', 'charu07@gmail.com', '45983322', 'testing', 3, 'COMPLETED', 'PRACTICE');
  insert into Solutions values('16345648', 'charu07@gmail.com', '56321409', 'testing', 3, 'COMPLETED', 'PRACTICE');
 
-*/
+
