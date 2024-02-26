@@ -132,8 +132,10 @@ CREATE table Tournament
 	Start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	End_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	Q_ID int,
+	Sol_ID varchar(8)
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID),
-	FOREIGN KEY(mailID) REFERENCES Users(mailID) 
+	FOREIGN KEY(mailID) REFERENCES Users(mailID),
+	FOREIGN KEY(Sol_ID) REFERENCES Solutions(Sol_ID),
 );
 
 INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
