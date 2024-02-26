@@ -135,7 +135,7 @@ CREATE table Tournament
 	Sol_ID varchar(8)
 	FOREIGN KEY(Q_ID) REFERENCES Questions(Q_ID),
 	FOREIGN KEY(mailID) REFERENCES Users(mailID),
-	FOREIGN KEY(Sol_ID) REFERENCES Solutions(Sol_ID),
+	FOREIGN KEY(Sol_ID) REFERENCES Solutions(Sol_ID)
 );
 
 INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
