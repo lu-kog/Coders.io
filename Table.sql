@@ -49,7 +49,7 @@ CREATE table ClanRelation
 (
 	clanID varchar(8),
 	mailID varchar(30) NOT NULL UNIQUE,
-	role enum('CO_ADMIN', 'MEMBER') default 'MEMBER',
+	role enum('CO_ADMIN', 'MEMBER', 'ADMIN') default 'MEMBER',
 	FOREIGN KEY(clanID) REFERENCES Clan(clanID) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(mailID) REFERENCES Users(mailID) ON DELETE CASCADE ON UPDATE CASCADE
 );
