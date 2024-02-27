@@ -137,6 +137,14 @@ CREATE table Tournament
 	FOREIGN KEY(mailID) REFERENCES Users(mailID) 
 );
 
+CREATE table SessionForOTP
+(
+	mailID varchar(30),
+	otpValue varchar(20),
+	FOREIGN KEY(mailID) REFERENCES Users(mailID) 
+);
+
+
 INSERT into Languages(lang_name) values('Java'), ('JavaScript'), ('Python');
 
 INSERT into Levels(level_name,score) values ('8Kyu',2),('7Kyu',3),('6Kyu',4);
