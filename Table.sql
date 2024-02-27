@@ -78,7 +78,7 @@ CREATE table Questions
     example text,
     levelID tinyint,
     Author varchar(30),
-    status ('APPROVED', 'DISAPPROVED', 'NOTAPPROVED') default 'NOTAPPROVED',
+    status ('APPROVED', 'NOTAPPROVED') default 'NOTAPPROVED',
     FOREIGN KEY(Author) REFERENCES Users(mailID),
     FOREIGN KEY(levelID) REFERENCES Levels(levelID)
 );
