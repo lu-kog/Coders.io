@@ -8,7 +8,7 @@ public class CommonLogger {
 	
 	public <T> CommonLogger(Class<T> cls) {
 		logger = Logger.getLogger(cls);
-		PropertyConfigurator.configure("~/log4.properties");
+		PropertyConfigurator.configure("/home/gokul-zstk330/log4.properties");
 	}
 	
 	public Logger getLogger() {

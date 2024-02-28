@@ -1,16 +1,20 @@
 package code.runner;
+import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
+import utils.CommonLogger;
+
 public class TestRunner {
-    public static void main(String[] args) throws Exception {
+   static Logger logger = new CommonLogger(TestRunner.class).getLogger();
+	public static void main(String[] args) throws Exception {
         String userid = "krish";
         String className = "Calculator";
     	// have to create object in run time
@@ -59,17 +63,31 @@ public class TestRunner {
                                                 .toList();
 
         
-        System.out.println("Test");
         
-        List<Future<JSONObject>> results = executor.invokeAll(tasks);
         System.out.println("Test");
-
+        PrintStream originalOut = System.out;
         
+        List<JSONObject> results = executor.invokeAll(tasks).stream().map((a)->{
+			try {
+				return a.get();
+			} catch (Exception e) {
+				logger.error(e);
+			}
+			return null;
+		}).toList();
+        
+        
+        executor.shutdown();
+        
+        System.setOut(originalOut);
         System.out.println("Results:");
         // Print test results
-        for (Future<JSONObject> result : results) {
-            System.out.println(result.get());
-        }
+        Iterator iterator = results.iterator();
+        for (int i = 1; iterator.hasNext();i++) {
+			JSONObject jsonObject = (JSONObject) iterator.next();
+			System.out.println("Case:"+i);
+			System.out.println(jsonObject);
+		}
         
         System.out.println("Done");
     }

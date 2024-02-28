@@ -2,9 +2,10 @@ package code.runner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
@@ -20,6 +21,10 @@ public class TestCase {
     private Object expectedOutput;
     private Object targetObject; 
 
+    private static ThreadLocal<ByteArrayOutputStream> baos = new ThreadLocal<>();
+    private static ThreadLocal<PrintStream> printStream = new ThreadLocal<>();
+    
+    
     public TestCase(Object targetObject, String methodName, Object expectedOutput, Object... parameters) {
         this.targetObject = targetObject;
         this.methodName = methodName;
@@ -34,10 +39,11 @@ public class TestCase {
 
             try {
             	// preparing seperate printstream for get all logs
-            	PrintStream originalOut = System.out;
-            	ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            	PrintStream newOut = new PrintStream(baos);
-            	System.setOut(newOut);
+            	
+            	baos.set(new ByteArrayOutputStream());
+            	printStream.set(new PrintStream(baos.get()));
+            	System.setOut(printStream.get());
+            	
             	
                 convertParametersType(parameters, parameterTypes);
                 
@@ -46,8 +52,8 @@ public class TestCase {
                 
                 Object result = method.invoke(targetObject, parameters);
                 
-                System.setOut(originalOut);
-                String logs = baos.toString();
+//                System.setOut(originalStream.get());
+                String logs = baos.get().toString();
                 
                 
                 boolean isPass = compareObjects(expectedOutput, result);

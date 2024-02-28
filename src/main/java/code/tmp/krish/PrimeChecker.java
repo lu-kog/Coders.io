@@ -1,4 +1,4 @@
-package code.runner;
+package code.tmp.krish;
 
 public class PrimeChecker {
 

@@ -29,10 +29,10 @@ public class DB {
 				logger.error("SQL driver not found!");
 			}
 			try {
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Coders.io", "root" , "");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Coders", "root" , "");
 				logger.info("DB connection created!");
 			} catch (SQLException e) {
-				logger.error("Error on sql: ");
+				logger.error(conn+"Error on sql: "+e);
 			}
 	      	
 		}
@@ -47,7 +47,8 @@ public class DB {
 		try {
 			statement = conn.prepareStatement("SELECT "+column+" FROM "+table_name+" WHERE "+column+" like ?");
             statement.setString(1, value);
-            logger.info(statement.toString());
+            
+            logger.info("value:"+value+" - "+statement.toString());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -61,6 +62,11 @@ public class DB {
 		return false;
 	}
 	
+	
+	
+	
+	
+	/*
 	
 	public static String createNewSession(String userID) throws Exception {
 		
@@ -144,6 +150,7 @@ public static boolean validateSession(String sessionID, String userID) throws Ex
 
     }
 	
-	
+	 * 
+	 */
 	
 }
