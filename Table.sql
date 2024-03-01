@@ -237,6 +237,6 @@ insert into LanguageRelation values(1, '45983322', 'name', 'test'),(3, '45983322
 
  insert into Solutions values('12345678', 'charu07@gmail.com', '45983322', 'testing', 1,'2023-02-07', 'COMPLETED', 'PRACTICE');
  insert into Solutions values('12345648', 'charu07@gmail.com', '45983322', 'testing', 3,'2023-08-07', 'COMPLETED', 'PRACTICE');
- insert into Solutions values('16345648', 'charu07@gmail.com', '56321409', 'testing', 3,'2023-09-01' 'COMPLETED', 'PRACTICE');
+ insert into Solutions values('16345648', 'charu07@gmail.com', '56321409', 'testing', 3,'2023-09-01', 'COMPLETED', 'PRACTICE');
 
 
